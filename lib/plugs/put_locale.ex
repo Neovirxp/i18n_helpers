@@ -3,7 +3,7 @@ defmodule I18nHelpers.Plugs.PutLocale do
 
   import Plug.Conn
 
-  @spec init(keyword) :: keyword
+  @spec init(list) :: list
   def init(options) do
     Keyword.get(options, :find_locale) ||
       raise ArgumentError, "must supply `find_locale` option"
@@ -11,7 +11,7 @@ defmodule I18nHelpers.Plugs.PutLocale do
     options
   end
 
-  @spec call(Plug.Conn.t(), keyword) :: Plug.Conn.t()
+  @spec call(Plug.Conn.t(), list) :: Plug.Conn.t()
   def call(conn, options) do
     find_locale = Keyword.fetch!(options, :find_locale)
     backend = Keyword.get(options, :backend)

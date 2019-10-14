@@ -20,7 +20,7 @@ defmodule I18nHelpers.Plugs.PutLocaleFromSubdomain do
 
   alias I18nHelpers.Plugs.PutLocaleFromConn
 
-  @spec init(keyword) :: keyword
+  @spec init(list) :: list
   def init(options) do
     options =
       Keyword.put(options, :find_locale, fn conn ->

@@ -32,7 +32,7 @@ defmodule I18nHelpers.Plugs.PutLocaleFromDomain do
 
   alias I18nHelpers.Plugs.PutLocaleFromConn
 
-  @spec init(keyword) :: keyword
+  @spec init(list) :: list
   def init(options) do
     domains_locales_map =
       Keyword.get(options, :domains_locales_map) ||

@@ -17,26 +17,33 @@ defmodule I18nHelpers.Plugs.PutLocaleFromPath do
     use the `:default locale` if specified, otherwise raise an error.
 
   """
+  import Plug.Conn
 
   alias I18nHelpers.Plugs.PutLocaleFromConn
 
-  @spec init(keyword) :: keyword
+  @callback init(options :: Keyword.t()) :: Plug.opts()
   def init(options) do
-    options =
-      Keyword.put(options, :find_locale, fn conn ->
-        List.first(conn.path_info)
-      end)
+    # IO.inspect(options)
+    # options =
+    #   Keyword.put(options, :find_locale, fn conn ->
+    #     List.first(conn.path_info)
+    #   end)
 
-    options =
-      Keyword.put(options, :handle_missing_locale, fn conn ->
-        raise "locale not found in path #{conn.request_path}"
-      end)
+    # options =
+    #   Keyword.put(options, :handle_missing_locale, fn conn ->
+    #     raise "locale not found in path #{conn.request_path}"
+    #   end)
 
-    PutLocaleFromConn.init(options)
+    # PutLocaleFromConn.init(options)
+    options
   end
 
   @spec call(Plug.Conn.t(), keyword) :: Plug.Conn.t()
   def call(conn, options) do
-    PutLocaleFromConn.call(conn, options)
+    locale = conn.params
+    |> Map.get("locale")
+
+    Gettext.put_locale(locale)
+    assign(conn, :locale, locale)
   end
 end

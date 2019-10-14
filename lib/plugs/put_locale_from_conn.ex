@@ -3,7 +3,7 @@ defmodule I18nHelpers.Plugs.PutLocaleFromConn do
 
   import Plug.Conn
 
-  @spec init(keyword) :: keyword
+  @spec init(list) :: list
   def init(options) do
     allowed_locales =
       Keyword.get(options, :allowed_locales)
@@ -47,7 +47,7 @@ defmodule I18nHelpers.Plugs.PutLocaleFromConn do
     end
   end
 
-  @spec call(Plug.Conn.t(), keyword) :: Plug.Conn.t()
+  @spec call(Plug.Conn.t(), list) :: Plug.Conn.t()
   def call(conn, options) do
     find_locale = Keyword.fetch!(options, :find_locale)
     handle_missing_locale = Keyword.fetch!(options, :handle_missing_locale)

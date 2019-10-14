@@ -1,12 +1,12 @@
 defmodule I18nHelpers.MixProject do
   use Mix.Project
 
-  @version "0.6.0"
+  @version "0.6.1"
 
   def project do
     [
       app: :i18n_helpers,
-      elixir: "~> 1.9",
+      elixir: "~> 1.7",
       deps: deps(),
       elixirc_paths: elixirc_paths(Mix.env()),
 
@@ -31,7 +31,7 @@ defmodule I18nHelpers.MixProject do
   defp deps do
     [
       {:gettext, "~> 0.17"},
-      {:ecto, "~> 3.2", optional: true},
+      {:ecto, "~> 3.0", optional: true},
       {:phoenix_html, "~> 2.13", optional: true},
       {:plug, "~> 1.8.3 or ~> 1.9", optional: true},
       {:ex_doc, "~> 0.21", only: :dev},
